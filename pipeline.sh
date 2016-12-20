@@ -130,7 +130,7 @@ done;
 #extract feature annotation information
 ######
 extract="$(ls *.pulls.txt | head -n 1)";
-cut -f 1,4-5 "$extract" > feat.gen.loc;
+cut -f 4-5 "$extract" > feat.gen.loc;
 cut -f 9 "$extract" | sed 's/^gene_id.\"//g' | sed 's/\".*//g' > feat.anno.loc
 paste feat.anno.loc feat.gen.log | pr -t > feat.anno;
 
@@ -138,7 +138,7 @@ paste feat.anno.loc feat.gen.log | pr -t > feat.anno;
 #extract intergenic annotation information
 ######
 extract="$(ls *.intergenic.txt | head -n 1)";
-cut -f 1,4-5 "$extract" > inter.gen.anno;
+cut -f 4-5 "$extract" > inter.gen.anno;
 cut -f 9 "$extract" > inter.anno.loc;
 paste inter.anno.loc inter.gen.log | pr -t > inter.anno;
 for f in *intergenic.txt; do
