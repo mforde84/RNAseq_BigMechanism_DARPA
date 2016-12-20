@@ -77,7 +77,7 @@ STAR --genomeLoad Remove --outFileNamePrefix "$genome_dir"/genome.remove. --geno
 #combine novel splice junctions
 ######
 for f in *.SJ.out.tab; do
- cat "$f" >> combo.SJ.out.tab;
+	cat "$f" >> combo.SJ.out.tab;
 done;
 
 ######
@@ -91,7 +91,7 @@ STAR --runThreadN "$threadstwo" --runMode genomeGenerate --genomeDir "$genome_di
 ######
 cd "$fastq_dir";
 for z in *.fastq; do
- STAR --runMode alignReads --outFileNamePrefix "$z".2pass. --runThreadN "$threadstwo" --genomeDir "$genome_dir"/2pass --genomeLoad LoadAndKeep --readFilesIn "$z" --outSAMtype BAM Unsorted --outFilterType BySJout --outFilterMultimapNmax 20  --alignSJoverhangMin 8 --alignSJDBoverhangMin 1 --outFilterMismatchNmax 999 --outFilterMismatchNoverLmax 0.04 --alignIntronMin 20 --alignIntronMax 1000000  --alignMatesGapMax 1000000;
+	STAR --runMode alignReads --outFileNamePrefix "$z".2pass. --runThreadN "$threadstwo" --genomeDir "$genome_dir"/2pass --genomeLoad LoadAndKeep --readFilesIn "$z" --outSAMtype BAM Unsorted --outFilterType BySJout --outFilterMultimapNmax 20  --alignSJoverhangMin 8 --alignSJDBoverhangMin 1 --outFilterMismatchNmax 999 --outFilterMismatchNoverLmax 0.04 --alignIntronMin 20 --alignIntronMax 1000000  --alignMatesGapMax 1000000;
 done;
 STAR --genomeLoad Remove --outFileNamePrefix "$genome_dir"/2pass/genome.remove. --genomeDir "$genome_dir"/2pass;
 
@@ -104,7 +104,7 @@ find fastq/ -name "*2pass*Aligned.out.bam" | xargs -n 1 -P "$threadstwo" -iFILES
 #resolve multimapped reads
 ######
 for f in *.sort.bam; do
- mmr -o "$f".mmr.bam -t "$threadstwo" -S -b "$f";
+	mmr -o "$f".mmr.bam -t "$threadstwo" -S -b "$f";
 done;
 
 ######
